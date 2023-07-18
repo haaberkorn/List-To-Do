@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import User from "./types/user";
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -22,6 +23,12 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 FirestoreApi.getInstance().init(app);
+
+// const user:User = {name:"keyner", lastname:"luque", email:"kkekeke@hotmail.com"}
+// FirestoreApi.getInstance().userNew(user);
+
+FirestoreApi.getInstance().userNew({name:"keyner", lastname:"luque", email:"kkekeke@hotmail.com"});
+
 const analytics = getAnalytics(app);
 
 const root = ReactDOM.createRoot(

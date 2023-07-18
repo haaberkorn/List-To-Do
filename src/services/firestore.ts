@@ -1,9 +1,11 @@
 import { FirebaseApp } from "@firebase/app";
+import User from "../types/user";
 import {
   getFirestore,
   Firestore,
   collection,
   getDocs,
+  addDoc,
 } from "@firebase/firestore";
 
 //create a singleton class
@@ -22,7 +24,7 @@ class FirestoreApi {
   database?: Firestore;
 
   init(app: FirebaseApp) {
-    console.log("init")
+    console.log("init");
     this.database = getFirestore(app);
     this.doSomething();
   }
@@ -33,7 +35,10 @@ class FirestoreApi {
     console.log(result.docs.map((doc) => doc.data()));
   }
 
-
+  async userNew(user: User) {
+    const userCollection = collection(this.database!, "users");
+    await addDoc(userCollection, user);
+  }
 }
 
 export default FirestoreApi;
